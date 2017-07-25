@@ -44,12 +44,30 @@ public class Practice14GetFontMetricsView extends View {
         // 然后计算出文字的绘制位置，从而让文字上下居中
         // 这种居中算法的优点是，可以让不同的文字的 baseline 对齐
 
+
+        //画辅助线
+        canvas.save();
+        canvas.translate(0, (top + bottom) / 2);
+        Paint.FontMetrics fontMetrics = paint2.getFontMetrics();
+        paint1.reset();
+        paint1.setColor(Color.RED);
+        canvas.drawLine(0, fontMetrics.ascent, getWidth(), fontMetrics.ascent, paint1);
+        canvas.drawLine(0, fontMetrics.descent, getWidth(), fontMetrics.descent, paint1);
+        paint1.setColor(Color.GREEN);
+        canvas.drawLine(0, fontMetrics.top, getWidth(), fontMetrics.top, paint1);
+        canvas.drawLine(0, fontMetrics.bottom, getWidth(), fontMetrics.bottom, paint1);
+        paint1.setColor(Color.BLACK);
+        canvas.drawLine(0, 0, getWidth(), 0, paint1);
+
+        float x = (fontMetrics.ascent + fontMetrics.descent) / 2;
+        canvas.restore();
+
         int middle = (top + bottom) / 2;
-        canvas.drawText(texts[0], 100, middle, paint2);
-        canvas.drawText(texts[1], 200, middle, paint2);
-        canvas.drawText(texts[2], 300, middle, paint2);
-        canvas.drawText(texts[3], 400, middle, paint2);
-        canvas.drawText(texts[4], 500, middle, paint2);
-        canvas.drawText(texts[5], 600, middle, paint2);
+        canvas.drawText(texts[0], 100, middle - x, paint2);
+        canvas.drawText(texts[1], 200, middle - x, paint2);
+        canvas.drawText(texts[2], 300, middle - x, paint2);
+        canvas.drawText(texts[3], 400, middle - x, paint2);
+        canvas.drawText(texts[4], 500, middle - x, paint2);
+        canvas.drawText(texts[5], 600, middle - x, paint2);
     }
 }
